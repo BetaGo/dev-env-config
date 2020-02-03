@@ -19,7 +19,7 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 1. clone 代码到 `$ZSH_CUSTOM/plugins` (默认是 `~/.oh-my-zsh/custom/plugins`)
 
    ```sh
-   git clone https://github.com/zsh-users/zsh-autosuggestions \${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
+   git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
    ```
 
 2. 添加 `zsh-autosuggestions` 到 _Oh My Zsh_ 的插件列表：
