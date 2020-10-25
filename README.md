@@ -4,3 +4,4 @@
 
 - [zsh 配置](./zsh.md)
 - [haskell 配置](./haskell.md)
+- [windows terminal](./windows-terminal.md)
