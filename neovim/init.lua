@@ -21,6 +21,7 @@ require("packer").startup(function()
 	-- UI to select things (files, grep results, open buffers...)
 	use({ "nvim-telescope/telescope.nvim", requires = { "nvim-lua/plenary.nvim" } })
 	use("rakr/vim-one")
+	use("arcticicestudio/nord-vim")
 	-- Add indentation guides even on blank lines
 	use("lukas-reineke/indent-blankline.nvim")
 	-- Highlight, edit, and navigate code using a fast incremental parsing library
@@ -33,13 +34,14 @@ require("packer").startup(function()
 	use("saadparwaiz1/cmp_luasnip")
 	use("L3MON4D3/LuaSnip") -- Snippets plugin
 	use({ "kyazdani42/nvim-tree.lua", requires = { "kyazdani42/nvim-web-devicons" } })
-	use({ "akinsho/bufferline.nvim", requires = "kyazdani42/nvim-web-devicons" })
+	use({ "akinsho/bufferline.nvim", tag = "v2.*", requires = "kyazdani42/nvim-web-devicons" })
 	use({ "sindrets/diffview.nvim", requires = "nvim-lua/plenary.nvim" })
 	use({ "kassio/neoterm" })
 	use({ "sbdchd/neoformat" })
 	use({ "editorconfig/editorconfig-vim" })
 	use({ "github/copilot.vim" })
 	use({ "vim-airline/vim-airline" })
+	use({ "simrat39/symbols-outline.nvim" })
 end)
 
 -- gui font size
@@ -84,9 +86,9 @@ vim.o.expandtab = true
 
 --Set colorscheme (order is important here)
 vim.o.termguicolors = true
-vim.o.background = "light"
+vim.o.background = "dark"
 vim.g.one_alow_italics = 1
-vim.cmd([[colorscheme one]])
+vim.cmd([[colorscheme nord]])
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = "menuone,noselect"
@@ -95,6 +97,64 @@ vim.o.completeopt = "menuone,noselect"
 vim.api.nvim_set_keymap("", "<Space>", "<Nop>", { noremap = true, silent = true })
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
+
+-- symobls-outline configurations
+vim.g.symbols_outline = {
+	highlight_hovered_item = true,
+	show_guides = true,
+	auto_preview = true,
+	position = "right",
+	relative_width = true,
+	width = 25,
+	auto_close = false,
+	show_numbers = false,
+	show_relative_numbers = false,
+	show_symbol_details = true,
+	preview_bg_highlight = "Pmenu",
+	keymaps = { -- These keymaps can be a string or a table for multiple keys
+		close = { "<Esc>", "q" },
+		goto_location = "<Cr>",
+		focus_location = "o",
+		hover_symbol = "<C-space>",
+		toggle_preview = "K",
+		rename_symbol = "r",
+		code_actions = "a",
+	},
+	lsp_blacklist = {},
+	symbol_blacklist = {},
+	symbols = {
+		File = { icon = "", hl = "TSURI" },
+		Module = { icon = "", hl = "TSNamespace" },
+		Namespace = { icon = "", hl = "TSNamespace" },
+		Package = { icon = "", hl = "TSNamespace" },
+		Class = { icon = "𝓒", hl = "TSType" },
+		Method = { icon = "ƒ", hl = "TSMethod" },
+		Property = { icon = "", hl = "TSMethod" },
+		Field = { icon = "", hl = "TSField" },
+		Constructor = { icon = "", hl = "TSConstructor" },
+		Enum = { icon = "ℰ", hl = "TSType" },
+		Interface = { icon = "ﰮ", hl = "TSType" },
+		Function = { icon = "", hl = "TSFunction" },
+		Variable = { icon = "", hl = "TSConstant" },
+		Constant = { icon = "", hl = "TSConstant" },
+		String = { icon = "𝓐", hl = "TSString" },
+		Number = { icon = "#", hl = "TSNumber" },
+		Boolean = { icon = "⊨", hl = "TSBoolean" },
+		Array = { icon = "", hl = "TSConstant" },
+		Object = { icon = "⦿", hl = "TSType" },
+		Key = { icon = "🔐", hl = "TSType" },
+		Null = { icon = "NULL", hl = "TSType" },
+		EnumMember = { icon = "", hl = "TSField" },
+		Struct = { icon = "𝓢", hl = "TSType" },
+		Event = { icon = "🗲", hl = "TSType" },
+		Operator = { icon = "+", hl = "TSOperator" },
+		TypeParameter = { icon = "𝙏", hl = "TSParameter" },
+	},
+}
+
+-- terminal
+
+vim.api.nvim_set_keymap("t", "<Esc>", "<C-\\><C-n>", { noremap = true, silent = true })
 
 --Remap for dealing with word wrap
 vim.api.nvim_set_keymap("n", "k", "v:count == 0 ? 'gk' : 'k'", { noremap = true, expr = true, silent = true })
@@ -360,6 +420,7 @@ local servers = {
 	"html",
 	"cssls",
 	"clangd",
+	"svelte",
 }
 
 for _, lsp in pairs(servers) do
