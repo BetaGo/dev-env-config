@@ -43,3 +43,8 @@ sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/too
 ## 安装 [autojump](autojump)
 
 快速转到目标文件/文件夹
+
+# 安装 [atuin](https://github.com/atuinsh/atuin#install)
+✨ Magical shell history
+
+
